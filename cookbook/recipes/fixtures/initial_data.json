@@ -1,0 +1,31 @@
+[
+{
+    "model": "recipes.category",
+    "pk": 1,
+    "fields": {
+        "name": "Quick",
+        "slug": "quick",
+        "description": ""
+    }
+},
+{
+    "model": "recipes.recipe",
+    "pk": 1,
+    "fields": {
+        "title": "Scrambled eggs",
+        "slug": "scrambled-eggs",
+        "ingredients": "one egg\r\nanother one",
+        "preparation": "frifhjuafijhrqiufh iewqhfjl hjql",
+        "time_for_preparation": null,
+        "number_of_portions": 4,
+        "difficulty": 1,
+        "author": 1,
+        "photo": "recipes/scrambled-eggs.jpg",
+        "date_created": "2017-09-18T12:59:29.259Z",
+        "date_updated": "2017-09-18T12:59:29.259Z",
+        "category": [
+            1
+        ]
+    }
+}
+]
