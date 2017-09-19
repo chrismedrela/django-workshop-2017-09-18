@@ -1,7 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
-
 from django.template import loader
 
 from .models import Recipe
@@ -9,12 +7,8 @@ from .models import Recipe
 # Create your views here.
 def index(request):
     recipes = Recipe.objects.all()
-    t = loader.get_template('recipes/index.html')
-    
-    c = {'object_list': recipes}  # create context with recipes
-    response = t.render(c)  # render the template
-    http_response = HttpResponse(response)  # wrap the result in HttpResponse
-    return http_response  # return the HttpResponse
+
+    return render_to_response('recipes/index.html', {'object_list': recipes})
 
 
 def detail(request, slug):
