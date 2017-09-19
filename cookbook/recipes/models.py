@@ -38,7 +38,7 @@ class Recipe(models.Model):
     number_of_portions = models.PositiveIntegerField('Number of portions')
     difficulty = models.SmallIntegerField('Difficulty',
         choices=DIFFICULTIES, default=DIFFICULTY_MEDIUM)
-    category = models.ManyToManyField(Category, verbose_name='Categories')
+    category = models.ManyToManyField(Category, verbose_name='Categories')  # related_name='recipe_set'
     author = models.ForeignKey(User, verbose_name='Author')
     photo = models.ImageField(upload_to='recipes', verbose_name='Photo', blank=True, null=True)
     date_created = models.DateTimeField(editable=False)
