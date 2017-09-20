@@ -38,9 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recipes',
+    'userauth',
     'django_extensions',
     'debug_toolbar',
 ]
+
+LOGIN_URL = 'userauth_login'
+LOGOUT_URL = 'userauth_logout'
+LOGIN_REDIRECT_URL = 'recipes_recipe_index'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,8 +136,37 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(pathname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'debuglog': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'debug.log'),
+            'maxBytes': 50000,
+            'backupCount': 1,
+            'formatter': 'simple'
+        },
+    },
+}
+
 
 try:
     from .local_settings import *
 except ImportError:
     pass
+
+
+if DEBUG:
+    LOGGING['loggers'] = {
+        'recipes': {
+            'handlers': ['debuglog'],
+            'level': 'DEBUG'
+        }
+    }
