@@ -11,7 +11,7 @@ urlpatterns = [
         {'template_name': 'userauth/login.html'},
         name='userauth_login'),
     url(r'^logout/$', auth_views.logout,
-        {'next_page': reverse_lazy('recipes_recipe_index')},  # TODO
+        {'next_page': 'recipes_recipe_index'},
         name='userauth_logout'),
     url(r'^password-change/$', auth_views.password_change,
         {'template_name': 'userauth/password_change_form.html',
