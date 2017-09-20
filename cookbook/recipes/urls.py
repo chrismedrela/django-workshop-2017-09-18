@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^recipe/(?P<slug>[-\w]+)/$', recipes.views.detail, 
         name='recipes_recipe_detail'),
     url(r'^$', recipes.views.index,
-        name='recieps_recipe_index'),
+        name='recipes_recipe_index'),
 ]
