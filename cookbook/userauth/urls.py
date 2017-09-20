@@ -2,6 +2,10 @@ from django.conf.urls import include, url
 from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse_lazy
 
+from django.views.generic import TemplateView
+
+import userauth.views
+
 urlpatterns = [
     url(r'^login/$', auth_views.login,
         {'template_name': 'userauth/login.html'},
@@ -16,4 +20,11 @@ urlpatterns = [
     url(r'^password-change-done/$', auth_views.password_change_done,
         {'template_name': 'userauth/password_change_done.html'},
         name='userauth_password_change_done'),
+
+    url(r'^register/$', userauth.views.register,
+        {'next_page_name': 'userauth_register_done'},
+        name='userauth_register'),
+    url(r'^welcome/$',
+        TemplateView.as_view(template_name='userauth/register_done.html'),
+        name='userauth_register_done'),
 ]

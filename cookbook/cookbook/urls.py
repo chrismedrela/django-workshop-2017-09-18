@@ -23,7 +23,7 @@ import userauth.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^user/', include(userauth.urls))
+    url(r'^user/', include(userauth.urls)),
     url(r'^', include(recipes.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
