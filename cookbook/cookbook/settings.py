@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'userauth',
     'django_extensions',
     'debug_toolbar',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 LOGIN_URL = 'userauth_login'
 LOGOUT_URL = 'userauth_logout'
