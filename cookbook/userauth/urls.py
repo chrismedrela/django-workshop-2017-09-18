@@ -6,8 +6,10 @@ from django.views.generic import TemplateView
 
 import userauth.views
 
+auth_views.login
+
 urlpatterns = [
-    url(r'^login/$', auth_views.login,
+    url(r'^login/$', userauth.views.login_view,
         {'template_name': 'userauth/login.html'},
         name='userauth_login'),
     url(r'^logout/$', auth_views.logout,
