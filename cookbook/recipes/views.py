@@ -42,7 +42,8 @@ class RecipeDetailView(DetailView):
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 
-class RecipeCreateView(CreateView):
+
+class RecipeCreateView(LoginRequiredMixin, CreateView):
     template_name = 'recipes/form.html'
     form_class = RecipeForm
     model = Recipe
