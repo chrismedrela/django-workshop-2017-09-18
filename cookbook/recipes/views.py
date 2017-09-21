@@ -36,11 +36,17 @@ def create(request):
 
 @login_required
 def edit(request, slug):
-    recipe = get_object_or_404(Recipe, slug=slug)  # get the right recipe from db
+    recipe = get_object_or_404(Recipe, slug=slug)
     if (request.user != recipe.author) and (not request.user.is_staff): 
         raise PermissionDenied
 
-    form = RecipeForm(instance=recipe)  # create empty RecipeForm
+    if request.method == "POST":
+        form = RecipeForm(instance=recipe, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            ...  # save the form, so that the recipe is updated
+            return ...  # redirect the user to detailed view of this recipe
+    else:
+        form = RecipeForm(instance=recipe)
     
     context = {'form': form, 'object': recipe, 'create': False}
-    return render(request, 'recipes/form.html', context)  # render right template
+    return render(request, 'recipes/form.html', context)
