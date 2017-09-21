@@ -9,6 +9,6 @@ urlpatterns = [
         name='recipes_recipe_index'),
     url(r'^create/$', recipes.views.RecipeCreateView.as_view(),
         name='recipes_recipe_create'),
-    url(r'^edit/(?P<slug>[-\w]+)/$', recipes.views.edit, 
+    url(r'^edit/(?P<slug>[-\w]+)/$', recipes.views.RecipeUpdateView.as_view(), 
         name='recipes_recipe_edit'),
 ]

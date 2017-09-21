@@ -79,6 +79,25 @@ def create(request):
     return render(request, 'recipes/form.html', context)
 
 
+from django.views.generic import UpdateView
+from django.contrib.auth.mixins import UserPassesTestMixin
+
+
+class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = 'recipes/form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['create'] = False
+        return context
+
+    def test_func(self):
+        recipe = self.get_object()
+        return recipe.author == self.request.user or self.request.user.is_staff
+
+
 @login_required
 def edit(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
