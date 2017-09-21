@@ -33,7 +33,17 @@ def detail(request, slug):
 
 @login_required
 def create(request):
-    form = RecipeForm()
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.slug = slugify(recipe.title)
+            recipe.save()
+            form.save_m2m()
+            return redirect(recipe)
+    else:
+        form = RecipeForm()
     context = {'form': form, 'create': True}
     return render(request, 'recipes/form.html', context)
 
