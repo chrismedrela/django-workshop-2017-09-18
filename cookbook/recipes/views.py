@@ -37,6 +37,10 @@ def create(request):
 @login_required
 def edit(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)  # get the right recipe from db
+    if (request.user != recipe.author) and (not request.user.is_staff): 
+        raise PermissionDenied
+
     form = RecipeForm(instance=recipe)  # create empty RecipeForm
+    
     context = {'form': form, 'object': recipe, 'create': False}
     return render(request, 'recipes/form.html', context)  # render right template
