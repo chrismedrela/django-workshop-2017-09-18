@@ -31,8 +31,12 @@ def detail(request, slug):
     return render(request, 'recipes/detail.html', {'object': recipe})
 
 
+@login_required
 def create(request):
-    pass
+    form = RecipeForm()
+    context = {'form': form, 'create': True}
+    return render(request, 'recipes/form.html', context)
+
 
 @login_required
 def edit(request, slug):
