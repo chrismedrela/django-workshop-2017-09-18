@@ -1,4 +1,9 @@
 {% if user.is_authenticated %}
+
+<ul class="nav navbar-nav">
+    <li><a href="{% url 'recipes_recipe_create' %}">Create recipe</a></li>
+</ul>
+
 <ul class="nav pull-right">
     <li class="dropdown">
         <a class="dropdown-toggle" id="dropuser" data-toggle="dropdown" href="#">

@@ -15,5 +15,7 @@
   {% if object.photo %}
     <p><img src="{{ object.photo.url }}" width="{{ object.photo.width }}" height="{{ object.photo.height }}"></p>
   {% endif %}
+
+  <p><a href="{% url 'recipes_recipe_edit' object.slug %}">Edit recipe</a></p>  
   <a href="{% url 'recipes_recipe_index' %}">back to the overview</a>
 {% endblock %}
