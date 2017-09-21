@@ -43,8 +43,8 @@ def edit(request, slug):
     if request.method == "POST":
         form = RecipeForm(instance=recipe, data=request.POST, files=request.FILES)
         if form.is_valid():
-            ...  # save the form, so that the recipe is updated
-            return ...  # redirect the user to detailed view of this recipe
+            form.save()
+            return redirect(recipe)
     else:
         form = RecipeForm(instance=recipe)
     

@@ -59,5 +59,5 @@ class Recipe(models.Model):
         self.date_updated = now()
         super(Recipe, self).save(*args, **kwargs)
 
-    def get_absolute_path(self):
+    def get_absolute_url(self):
         return reverse('recipes_recipe_detail', kwargs={'slug': self.slug})
