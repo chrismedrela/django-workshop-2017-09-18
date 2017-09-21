@@ -1,10 +1,14 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404
-from django.template import loader
-
-from .models import Recipe
-
 import logging
+
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template import loader
+from django.template.defaultfilters import slugify
+
+from .forms import RecipeForm
+from .models import Recipe
 
 logger = logging.getLogger(__name__)
 
@@ -25,3 +29,14 @@ def detail(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
     # import ipdb; ipdb.set_trace()
     return render(request, 'recipes/detail.html', {'object': recipe})
+
+
+def create(request):
+    pass
+
+@login_required
+def edit(request, slug):
+    recipe = get_object_or_404(Recipe, slug=slug)  # get the right recipe from db
+    form = RecipeForm(instance=recipe)  # create empty RecipeForm
+    context = {'form': form, 'object': recipe, 'create': False}
+    return render(request, 'recipes/form.html', context)  # render right template
